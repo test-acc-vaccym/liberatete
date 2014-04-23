@@ -90,6 +90,7 @@ public class SetPasswordActivity extends Activity {
 		if ( password1.equals(password2) )
 		{
 			MainActivity.setPassword(this, password1);
+			mSetPasswordStatusMessageView.setText("");
 			finish();
 		}
 	
@@ -140,7 +141,7 @@ public class SetPasswordActivity extends Activity {
 	/**
 	 * Shows the progress UI and hides the login form.
 	 */
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+/*	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
 	private void showProgress(final boolean show) {
 		// On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
 		// for very easy animations. If available, use these APIs to fade-in
@@ -166,4 +167,4 @@ public class SetPasswordActivity extends Activity {
 			mSetPasswordStatusMessageView.setVisibility(show ? View.VISIBLE : View.GONE);
 		}
 	}
-}
+*/}

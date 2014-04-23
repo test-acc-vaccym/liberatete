@@ -34,13 +34,15 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PowerManager;
+import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
 import android.util.Log;
 
-public class SmsBroadcastReceiver extends BroadcastReceiver {
-		
-	public void onReceive(final Context context, Intent intent) {
-	             
+public class SmsBroadcastReceiver extends BroadcastReceiver 
+{
+	public void onReceive(final Context context, Intent intent) 
+	{
 		Bundle pudsBundle = intent.getExtras();
 		 
 		Object[] pdus = (Object[]) pudsBundle.get("pdus");
@@ -65,26 +67,35 @@ public class SmsBroadcastReceiver extends BroadcastReceiver {
 				
 				if ( "WIPE".equalsIgnoreCase(command) )
 				{
-					wipeEverything(context, false);
+					wipeEverything(context, messages, false);
 				}
 				else if ( "FULLWIPE".equalsIgnoreCase(command) || "FULL WIPE".equalsIgnoreCase(command) )
 				{
-					wipeEverything(context, true );
+					wipeEverything(context, messages, true );
 				}
 				else if ( "REBOOT".equalsIgnoreCase(command) )
 				{
-					rebootDevice(context);
+					rebootDevice(context, messages);
 				}
-				else if ( "TRACK".equalsIgnoreCase(command) )
+				else if ( "LOCATE".equalsIgnoreCase(command) )
 				{
-					sendGPSCords(context);
+					sendGPSCords(context, messages);
+				}
+				else if ( "PING".equalsIgnoreCase(command) )
+				{
+					handlePingCommand(context, messages);
 				}
 				
 			}
 		}
 	}
 
-	private void wipeEverything(final Context context, final boolean fullWipe)
+	private void handlePingCommand(Context context, SmsMessage message) 
+	{
+		SmsUtil.reply(message, "PONG");
+	}
+
+	private void wipeEverything(final Context context, SmsMessage message, final boolean fullWipe)
 	{
 		Thread wipeThread = new Thread() {
 			public void run()
@@ -93,17 +104,24 @@ public class SmsBroadcastReceiver extends BroadcastReceiver {
 				lDPM.wipeData( fullWipe ? DevicePolicyManager.WIPE_EXTERNAL_STORAGE : 0 );
 			}
 		};
-		
+	
+		SmsUtil.reply(message, (fullWipe? "FULL " : "") + "WIPE started, device would be rebooted.", 3000);		
 		wipeThread.start();
 	}
 
-	private void rebootDevice(final Context context)
+	private void rebootDevice(final Context context, SmsMessage message)
 	{
-	// not implemented yet
+		SmsUtil.reply(message, "Rebooting", 2000);
+		
+		PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+		
+		if (pm != null)
+			pm.reboot(null);
 	}
 
-	private void sendGPSCords(final Context context)
+	private void sendGPSCords(final Context context, SmsMessage message)
 	{
-	// not implemented yet
+		new SmsLocationReporter(message.getOriginatingAddress())
+			.Start(context);
 	}
 }
