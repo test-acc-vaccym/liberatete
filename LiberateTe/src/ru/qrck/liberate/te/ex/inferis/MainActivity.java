@@ -28,18 +28,25 @@
 package ru.qrck.liberate.te.ex.inferis;
 
 import ru.qrck.liberate.te.ex.inferis.R;
-
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.admin.DeviceAdminReceiver;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -49,11 +56,62 @@ public class MainActivity extends Activity
 	public static final String SHARED_PREF = "ru.qrck.liberate.te.inferis.PREF";
 	public static final String PASSWORD_KEY = "pwd";
 	public static final String LAUNCHER_DISABLED_KEY = "ldis";
+	public static final String DISCLAMER_AGREED = "agreed_with_terms";
 	
 	
 	private DevicePolicyManager mDPM = null;
 	private ComponentName mDeviceAdmin = null;
+	
+	private boolean displayingDisclamer = false;
     
+	private void displayDisclamer(final Context ctx)
+	{
+		if (getIsDisclamerAgreed(ctx))
+			return;
+		
+		if (displayingDisclamer) // already displaying, launched from another location
+			return; 
+
+		displayingDisclamer = true;
+
+		final Activity activity = this;
+		
+		
+        // Use the Builder class for convenient dialog construction
+        new AlertDialog.Builder(this)
+    		.setMessage(
+    					"DISCLAMER\n"+
+    					"By using this application you agree that you understand that "+
+    					"main purpose of this application is to perform device factory "+
+    					"reset, this would erase everything on your device!\n"+
+    					"Beware of accidental triggering this funciton and make sure "+
+    					"noone knows your password, so noone could remotely wipe "+
+    					"your device. \n"+
+    					"Author of this application takes no responsibility for "+
+    					"accidental data loss.\n"+
+    					"Software cames with NO WARRANTY.\n"+
+    					"Before using this application you must agree with this disclamer.")
+    		.setPositiveButton("Agree", 
+    			new DialogInterface.OnClickListener() 
+        		{
+        			public void onClick(DialogInterface dialog, int id)
+        			{ 
+        				setDisclamerAgreed(ctx); 
+        				displayingDisclamer = false;
+        			}
+        		})
+    		.setNegativeButton("Disagree", 
+    			new DialogInterface.OnClickListener() 
+    			{
+    				public void onClick(DialogInterface dialog, int id)
+    				{
+    					displayingDisclamer = false;
+    					activity.finish(); 
+    				}
+    			})
+			.create()
+			.show();
+    }
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -78,6 +136,8 @@ public class MainActivity extends Activity
 
 		boolean isPassword = isPasswordConfigured();
 		boolean isAdmin = isActiveAdmin();
+		
+		displayDisclamer(this);
 
 		Button step1 = (Button) findViewById( R.id.buttonSetPassword );
 		Button step2 = (Button) findViewById( R.id.buttonEnableDeviceAdmin );
@@ -145,21 +205,32 @@ public class MainActivity extends Activity
 	}
 
 	
+	public static void setDisclamerAgreed(Context ctx)
+	{
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
+		SharedPreferences.Editor editor = prefs.edit();
+		editor.putBoolean(DISCLAMER_AGREED, true);
+		editor.commit();
+	}
+	
+	public static Boolean getIsDisclamerAgreed(Context ctx)
+	{
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
+		return prefs.getBoolean(DISCLAMER_AGREED, false);
+	}
+
+	
 	protected static void setPassword(Context ctx, String strPassword)
 	{
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
-		
 		SharedPreferences.Editor editor = prefs.edit();
-		
 		editor.putString(PASSWORD_KEY, strPassword);
-		
 		editor.commit();
 	}
 	
 	public static String getPassword(Context ctx)
 	{
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
-		
 		return prefs.getString(PASSWORD_KEY, "");
 	}
 	

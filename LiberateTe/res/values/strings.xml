@@ -19,16 +19,21 @@
 	
 	
 	<string name="hint"><b>Remote Control Commands:</b>\n 
+	    <ul>
 	    <li><b><i>PASSWORD</i> WIPE</b> - wipe your device</li>\n
 	    <li><b><i>PASSWORD</i> FULL WIPE</b> - wipe your device + SD card</li>\n
-	     
+	    <li><b><i>PASSWORD</i> REBOOT</b> - restarts your device</li>\n
+	    <li><b><i>PASSWORD</i> LOCATE</b> - request current location, app would reply with one or few location update messages. More than one update would be send if precise location isn\'t known within the first 20 seconds, but later it was found</li>\n
+	    <li><b><i>PASSWORD</i> PING</b> - app would respond with "PONG" text</li>\n
+	    </ul>
+	    
 	    \nTo disable <i>Liberate.Te</i>, follow steps below:\n
-	    <li>Open Settings app</li>\n
+	    <ul><li>Open Settings app</li>\n
 	    <li>Open Security </li> \n
 		<li>Open Device administrators</li>\n
 		<li>Disable device admin for <i>Liberate.Te</i></li>\n
 		<li>Uninstall <i>Liberate.Te</i> via android package managed</li>
-		
+		</ul>
 	</string>
 	
 	<string name="setpassword">Set your remote control password</string>
