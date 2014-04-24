@@ -51,8 +51,8 @@ import android.support.v4.app.NavUtils;
  * Activity which displays a login screen to the user, offering registration as
  * well.
  */
-public class SetPasswordActivity extends Activity {
-
+public class SetPasswordActivity extends Activity 
+{
 	
 	/**
 	 * Keep track of the login task to ensure we can cancel it if requested.
@@ -105,16 +105,20 @@ public class SetPasswordActivity extends Activity {
 	 * Set up the {@link android.app.ActionBar}, if the API is available.
 	 */
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-	private void setupActionBar() {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+	private void setupActionBar() 
+	{
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) 
+		{
 			// Show the Up button in the action bar.
 			getActionBar().setDisplayHomeAsUpEnabled(true);
 		}
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
+	public boolean onOptionsItemSelected(MenuItem item) 
+	{
+		switch (item.getItemId()) 
+		{
 		case android.R.id.home:
 			// This ID represents the Home or Up button. In the case of this
 			// activity, the Up button is shown. Use NavUtils to allow users
@@ -132,39 +136,10 @@ public class SetPasswordActivity extends Activity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateOptionsMenu(Menu menu) 
+	{
 		super.onCreateOptionsMenu(menu);
 		getMenuInflater().inflate(R.menu.set_password, menu);
 		return true;
 	}
-
-	/**
-	 * Shows the progress UI and hides the login form.
-	 */
-/*	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-	private void showProgress(final boolean show) {
-		// On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-		// for very easy animations. If available, use these APIs to fade-in
-		// the progress spinner.
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-			int shortAnimTime = getResources().getInteger(
-					android.R.integer.config_shortAnimTime);
-
-			mSetPasswordStatusMessageView.setVisibility(View.VISIBLE);
-			mSetPasswordStatusMessageView.animate().setDuration(shortAnimTime)
-					.alpha(show ? 1 : 0)
-					.setListener(new AnimatorListenerAdapter() {
-						@Override
-						public void onAnimationEnd(Animator animation) {
-							mSetPasswordStatusMessageView.setVisibility(show ? View.VISIBLE
-									: View.GONE);
-						}
-					});
-
-		} else {
-			// The ViewPropertyAnimator APIs are not available, so simply show
-			// and hide the relevant UI components.
-			mSetPasswordStatusMessageView.setVisibility(show ? View.VISIBLE : View.GONE);
-		}
-	}
-*/}
+}

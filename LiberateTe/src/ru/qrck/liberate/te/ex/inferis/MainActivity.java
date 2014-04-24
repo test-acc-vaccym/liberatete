@@ -43,7 +43,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity 
+{
 
 	public static final String SHARED_PREF = "ru.qrck.liberate.te.inferis.PREF";
 	public static final String PASSWORD_KEY = "pwd";
@@ -55,7 +56,8 @@ public class MainActivity extends Activity {
     
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) 
+	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
@@ -204,13 +206,15 @@ public class MainActivity extends Activity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateOptionsMenu(Menu menu) 
+	{
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 
 	
-	public static class MyDeviceAdminReceiver extends DeviceAdminReceiver {
+	public static class MyDeviceAdminReceiver extends DeviceAdminReceiver 
+	{
 	}
 }

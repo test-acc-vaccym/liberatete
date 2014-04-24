@@ -95,6 +95,9 @@ public class SmsLocationReporter implements LocationListener
  
             sb.append(", Accuracy: ");
             sb.append(accuracy);
+            
+            if (!isGpsEnabled)
+            	sb.append(" [GPS is disabled]");
  
            	SmsUtil.send(requestedByAddr, sb.toString());
            	totalSentMsgs ++;
@@ -124,5 +127,4 @@ public class SmsLocationReporter implements LocationListener
 	public void onStatusChanged(String arg0, int arg1, Bundle arg2) 
 	{
 	}
-
 }

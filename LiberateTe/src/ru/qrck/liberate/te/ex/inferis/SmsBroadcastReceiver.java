@@ -55,9 +55,9 @@ public class SmsBroadcastReceiver extends BroadcastReceiver
 		{ 
 			String messageBody = messages.getMessageBody();
 
-			if ( messageBody.startsWith( password ) 
-					&& 
-				 messageBody.length() > password.length() )
+			if ( messageBody.length() > password.length()
+					&&
+				 messageBody.startsWith( password ) )
 			{	
 				abortBroadcast();
 				
