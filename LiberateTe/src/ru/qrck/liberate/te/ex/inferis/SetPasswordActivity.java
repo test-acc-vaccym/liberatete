@@ -81,7 +81,7 @@ public class SetPasswordActivity extends Activity
 		mSetPasswordStatusView = findViewById(R.id.set_password_status);
 		mSetPasswordStatusMessageView = (TextView) findViewById(R.id.set_password_status_message);
 
-		mSetPasswordStatusMessageView.setText("Please note: not a hash but oriignal password will be stored in configuration");	
+		mSetPasswordStatusMessageView.setText("Please note: app would save original password (internally), not its hash.");
 		mSetPasswordStatusMessageView.setVisibility(true ? View.VISIBLE : View.GONE);
 	}
 
