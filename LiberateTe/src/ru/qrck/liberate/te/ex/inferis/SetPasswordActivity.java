@@ -63,7 +63,7 @@ public class SetPasswordActivity extends Activity
 	private EditText mPasswordConfirmView;
 
 	private View mSetPasswordFormView;
-	private View mSetPasswordStatusView;
+	//private View mSetPasswordStatusView;
 	private TextView mSetPasswordStatusMessageView;
 
 	@Override
@@ -78,7 +78,7 @@ public class SetPasswordActivity extends Activity
 		mPasswordConfirmView = (EditText) findViewById(R.id.passwordConfirmation);
 
 		mSetPasswordFormView = findViewById(R.id.set_password_form);
-		mSetPasswordStatusView = findViewById(R.id.set_password_status);
+		//mSetPasswordStatusView = findViewById(R.id.set_password_status);
 		mSetPasswordStatusMessageView = (TextView) findViewById(R.id.set_password_status_message);
 
 		mSetPasswordStatusMessageView.setText("Please note: app would save original password (internally), not its hash.");

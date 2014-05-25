@@ -10,11 +10,11 @@
 
 	<string name="hintTop"><b><i>Liberate.Te</i> needs to be configured</b>\nPlease follow steps below:\n</string>
 	
-	<string name="step1"><b>Step1:</b>\nSet remote control password</string>
+	<string name="step1"><b>Step1:</b>\nSet remote control password\n(click me)</string>
 	<string name="step1done"><b>Step1:</b>\nSet remote control password - DONE!</string>
-	<string name="step2"><b>Step2:</b>\nEnable device admin</string>
+	<string name="step2"><b>Step2:</b>\nEnable device admin\n(click me)</string>
 	<string name="step2done"><b>Step2:</b>\nEnable device admin - DONE!</string>
-	<string name="step3"><b>Step3:</b>\nHide launcher icon</string>
+	<string name="step3"><b>Step3:</b>\nHide launcher icon\n(click me)</string>
 	<string name="step3done"><b>Step3:</b>\nHide launcher icon - DONE!</string>
 	
 	

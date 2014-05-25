@@ -91,6 +91,7 @@ public class MainActivity extends Activity
     					"accidental data loss.\n"+
     					"Software cames with NO WARRANTY.\n"+
     					"Before using this application you must agree with this disclamer.")
+    		.setCancelable(false)
     		.setPositiveButton("Agree", 
     			new DialogInterface.OnClickListener() 
         		{
