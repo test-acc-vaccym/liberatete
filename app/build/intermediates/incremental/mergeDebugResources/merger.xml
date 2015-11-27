@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main$Generated" generated="true"><source path="/home/quarck/src/LiberateTe/app/src/main/res"/><source path="/home/quarck/src/LiberateTe/app/build/generated/res/rs/debug"/><source path="/home/quarck/src/LiberateTe/app/build/generated/res/resValues/debug"/></dataSet><dataSet config="debug$Generated" generated="true"><source path="/home/quarck/src/LiberateTe/app/src/debug/res"/></dataSet><dataSet config="main" generated-set="main$Generated"><source path="/home/quarck/src/LiberateTe/app/src/main/res"><file name="device_admin_sample" path="/home/quarck/src/LiberateTe/app/src/main/res/xml/device_admin_sample.xml" qualifiers="" type="xml"/><file name="ic_launcher" path="/home/quarck/src/LiberateTe/app/src/main/res/drawable-mdpi/ic_launcher.png" qualifiers="mdpi-v4" type="drawable"/><file name="ic_launcher" path="/home/quarck/src/LiberateTe/app/src/main/res/drawable-xhdpi/ic_launcher.png" qualifiers="xhdpi-v4" type="drawable"/><file path="/home/quarck/src/LiberateTe/app/src/main/res/values-v14/styles.xml" qualifiers="v14"><style name="AppBaseTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <!-- API 14 theme customizations can go here. -->
+    </style></file><file path="/home/quarck/src/LiberateTe/app/src/main/res/values-sw720dp-land/dimens.xml" qualifiers="sw720dp-land-v13"><dimen name="activity_horizontal_margin">128dp</dimen></file><file path="/home/quarck/src/LiberateTe/app/src/main/res/values/strings.xml" qualifiers=""><string name="step2done"><b>Step2:</b>\nEnable device admin - DONE!</string><string name="hint"><b>Remote Control Commands:</b>\n 
+	    <ul>
+	    <li><b><i>PASSWORD</i> WIPE</b> - wipe your device</li>\n
+	    <li><b><i>PASSWORD</i> FULL WIPE</b> - wipe your device + SD card</li>\n
+	    <li><b><i>PASSWORD</i> REBOOT</b> - restarts your device</li>\n
+	    <li><b><i>PASSWORD</i> LOCATE</b> - request current location, app would reply with one or few location update messages. More than one update would be send if precise location isn\'t known within the first 20 seconds, but later it was found</li>\n
+	    <li><b><i>PASSWORD</i> PING</b> - app would respond with "PONG" text</li>\n
+	    </ul>
+	    
+	    \nTo disable <i>Liberate.Te</i>, follow steps below:\n
+	    <ul><li>Open Settings app</li>\n
+	    <li>Open Security </li> \n
+		<li>Open Device administrators</li>\n
+		<li>Disable device admin for <i>Liberate.Te</i></li>\n
+		<li>Uninstall <i>Liberate.Te</i> via android package managed</li>
+		</ul>
+	</string><string name="action_settings">Settings</string><string name="setpassword">Set your remote control password</string><string name="step1done"><b>Step1:</b>\nSet remote control password - DONE!</string><string name="step3done"><b>Step3:</b>\nHide launcher icon - DONE!</string><string name="device_admin_description">Liberate Te Ex Inferis</string><string name="step1"><b>Step1:</b>\nSet remote control password\n(click me)</string><string name="app_name">Liberate Te</string><string name="device_admin_label">Liberate.Te</string><string name="step3"><b>Step3:</b>\nHide launcher icon\n(click me)</string><string name="step2"><b>Step2:</b>\nEnable device admin\n(click me)</string><string name="hintTop"><b><i>Liberate.Te</i> needs to be configured</b>\nPlease follow steps below:\n</string></file><file path="/home/quarck/src/LiberateTe/app/src/main/res/values/styles.xml" qualifiers=""><style name="SetPasswordFormContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">16dp</item>
+    </style><style name="MainFormContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">16dp</item>
+    </style><style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style><style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style></file><file path="/home/quarck/src/LiberateTe/app/src/main/res/values/strings_activity_set_password.xml" qualifiers=""><string name="title_activity_set_password">Set Password</string><string name="prompt_password_confirmation">Confirm Password</string><string name="prompt_password">Password</string><string name="set_password">Set Password</string><string name="password_didnt_match">Passwords didn\'t match</string></file><file path="/home/quarck/src/LiberateTe/app/src/main/res/values/dimens.xml" qualifiers=""><dimen name="activity_horizontal_margin">16dp</dimen><dimen name="activity_vertical_margin">16dp</dimen></file><file name="ic_launcher" path="/home/quarck/src/LiberateTe/app/src/main/res/drawable-xxhdpi/ic_launcher.png" qualifiers="xxhdpi-v4" type="drawable"/><file name="ic_launcher" path="/home/quarck/src/LiberateTe/app/src/main/res/drawable-hdpi/ic_launcher.png" qualifiers="hdpi-v4" type="drawable"/><file name="set_password" path="/home/quarck/src/LiberateTe/app/src/main/res/menu/set_password.xml" qualifiers="" type="menu"/><file name="main" path="/home/quarck/src/LiberateTe/app/src/main/res/menu/main.xml" qualifiers="" type="menu"/><file path="/home/quarck/src/LiberateTe/app/src/main/res/values-v11/styles.xml" qualifiers="v11"><style name="AppBaseTheme" parent="android:Theme.Holo.Light">
+        <!-- API 11 theme customizations can go here. -->
+    </style></file><file path="/home/quarck/src/LiberateTe/app/src/main/res/values-large/styles.xml" qualifiers="large-v4"><style name="SetPasswordFormContainer">
+        <item name="android:layout_width">400dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:padding">16dp</item>
+    </style><style name="MainFormContainer">
+        <item name="android:layout_width">400dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:padding">16dp</item>
+    </style></file><file name="activity_set_password" path="/home/quarck/src/LiberateTe/app/src/main/res/layout/activity_set_password.xml" qualifiers="" type="layout"/><file name="activity_main" path="/home/quarck/src/LiberateTe/app/src/main/res/layout/activity_main.xml" qualifiers="" type="layout"/></source><source path="/home/quarck/src/LiberateTe/app/build/generated/res/rs/debug"/><source path="/home/quarck/src/LiberateTe/app/build/generated/res/resValues/debug"/></dataSet><dataSet config="debug" generated-set="debug$Generated"><source path="/home/quarck/src/LiberateTe/app/src/debug/res"/></dataSet><mergedItems/></merger>

@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/quarck/src/LiberateTe/app/build/intermediates/res/merged/debug/layout/activity_main.xml",
+        "source": "/home/quarck/src/LiberateTe/app/src/main/res/layout/activity_main.xml"
+    },
+    {
+        "merged": "/home/quarck/src/LiberateTe/app/build/intermediates/res/merged/debug/layout/activity_set_password.xml",
+        "source": "/home/quarck/src/LiberateTe/app/src/main/res/layout/activity_set_password.xml"
+    }
+]

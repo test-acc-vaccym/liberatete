@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <string name="action_settings">Settings</string>
+    <string name="app_name">Liberate Te</string>
+    <string name="device_admin_description">Liberate Te Ex Inferis</string>
+    <string name="device_admin_label">Liberate.Te</string>
+    <string name="hint"><b>Remote Control Commands:</b>\n 
+	    <ul>
+	    <li><b><i>PASSWORD</i> WIPE</b> - wipe your device</li>\n
+	    <li><b><i>PASSWORD</i> FULL WIPE</b> - wipe your device + SD card</li>\n
+	    <li><b><i>PASSWORD</i> REBOOT</b> - restarts your device</li>\n
+	    <li><b><i>PASSWORD</i> LOCATE</b> - request current location, app would reply with one or few location update messages. More than one update would be send if precise location isn\'t known within the first 20 seconds, but later it was found</li>\n
+	    <li><b><i>PASSWORD</i> PING</b> - app would respond with "PONG" text</li>\n
+	    </ul>
+	    
+	    \nTo disable <i>Liberate.Te</i>, follow steps below:\n
+	    <ul><li>Open Settings app</li>\n
+	    <li>Open Security </li> \n
+		<li>Open Device administrators</li>\n
+		<li>Disable device admin for <i>Liberate.Te</i></li>\n
+		<li>Uninstall <i>Liberate.Te</i> via android package managed</li>
+		</ul>
+	</string>
+    <string name="hintTop"><b><i>Liberate.Te</i> needs to be configured</b>\nPlease follow steps below:\n</string>
+    <string name="password_didnt_match">Passwords didn\'t match</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_password_confirmation">Confirm Password</string>
+    <string name="set_password">Set Password</string>
+    <string name="setpassword">Set your remote control password</string>
+    <string name="step1"><b>Step1:</b>\nSet remote control password\n(click me)</string>
+    <string name="step1done"><b>Step1:</b>\nSet remote control password - DONE!</string>
+    <string name="step2"><b>Step2:</b>\nEnable device admin\n(click me)</string>
+    <string name="step2done"><b>Step2:</b>\nEnable device admin - DONE!</string>
+    <string name="step3"><b>Step3:</b>\nHide launcher icon\n(click me)</string>
+    <string name="step3done"><b>Step3:</b>\nHide launcher icon - DONE!</string>
+    <string name="title_activity_set_password">Set Password</string>
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+    <style name="MainFormContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">16dp</item>
+    </style>
+    <style name="SetPasswordFormContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">16dp</item>
+    </style>
+</resources>
