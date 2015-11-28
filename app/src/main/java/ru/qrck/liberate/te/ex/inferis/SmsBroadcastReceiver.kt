@@ -32,11 +32,9 @@ import android.app.admin.DevicePolicyManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import android.os.PowerManager
-import android.telephony.SmsManager
 import android.telephony.SmsMessage
-import android.util.Log
+import kotlin.concurrent.thread
 
 class SmsBroadcastReceiver : BroadcastReceiver()
 {
@@ -97,14 +95,11 @@ class SmsBroadcastReceiver : BroadcastReceiver()
 
 	private fun wipeEverything(context: Context, message: SmsMessage, fullWipe: Boolean)
 	{
-		val wipeThread = object : Thread()
-		{
-			override fun run()
-			{
+		val wipeThread =
+			thread(false) {
 				val lDPM = context.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
 				lDPM.wipeData(if (fullWipe) DevicePolicyManager.WIPE_EXTERNAL_STORAGE else 0)
 			}
-		}
 
 		SmsUtil.reply(message, (if (fullWipe) "FULL " else "") + "WIPE started, device would be rebooted.", 3000)
 		wipeThread.start()

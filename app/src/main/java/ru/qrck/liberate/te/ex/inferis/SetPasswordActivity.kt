@@ -28,25 +28,17 @@
 
 package ru.qrck.liberate.te.ex.inferis
 
-import ru.qrck.liberate.te.ex.inferis.R
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.annotation.TargetApi
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.DialogInterface
-import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
-import android.text.TextUtils
-import android.view.KeyEvent
-import android.view.Menu
-import android.view.View
-import android.view.inputmethod.EditorInfo
-import android.widget.EditText
-import android.widget.TextView
-import android.view.MenuItem
 import android.support.v4.app.NavUtils
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import kotlinx.android.synthetic.activity_set_password.*
 
 /**
  * Activity which displays a login screen to the user, offering registration as
@@ -59,13 +51,6 @@ class SetPasswordActivity : Activity()
 	 * Keep track of the login task to ensure we can cancel it if requested.
 	 */
 
-	private var mPasswordView: EditText? = null
-	private var mPasswordConfirmView: EditText? = null
-
-	private var mSetPasswordFormView: View? = null
-	//private View mSetPasswordStatusView;
-	private var mSetPasswordStatusMessageView: TextView? = null
-
 	override fun onCreate(savedInstanceState: Bundle?)
 	{
 		super.onCreate(savedInstanceState)
@@ -73,22 +58,14 @@ class SetPasswordActivity : Activity()
 		setContentView(R.layout.activity_set_password)
 		setupActionBar()
 
-		mPasswordView = findViewById(R.id.password) as EditText
-
-		mPasswordConfirmView = findViewById(R.id.passwordConfirmation) as EditText
-
-		mSetPasswordFormView = findViewById(R.id.set_password_form)
-		//mSetPasswordStatusView = findViewById(R.id.set_password_status);
-		mSetPasswordStatusMessageView = findViewById(R.id.set_password_status_message) as TextView
-
-		mSetPasswordStatusMessageView!!.text = "Please note: app would save original password (internally), not its hash."
-		mSetPasswordStatusMessageView!!.visibility = if (true) View.VISIBLE else View.GONE
+		setPasswordStatusMessageLabel!!.text = "Please note: app would save original password (internally), not its hash."
+		setPasswordStatusMessageLabel!!.visibility = if (true) View.VISIBLE else View.GONE
 	}
 
 	fun setPassword(v: View)
 	{
-		val password1 = mPasswordView!!.text.toString()
-		val password2 = mPasswordConfirmView!!.text.toString()
+		val password1 = passwordEditBox!!.text.toString()
+		val password2 = passwordConfirmationBox!!.text.toString()
 
 		if (password1 == password2)
 		{
@@ -100,15 +77,9 @@ class SetPasswordActivity : Activity()
 							.Builder(this)
 							.setMessage("Entered password is shorter than 7 symbols. Are you sure to use short password? Short password makes it easier to guess your password and wipe your device remotely.")
 							.setPositiveButton("Use short",
-									object : DialogInterface.OnClickListener
-									{
-										override fun onClick(dialog: DialogInterface?, which: Int) = commitAndFinish(password1)
-									})
+									{ dialog: DialogInterface?, which: Int ->  commitAndFinish(password1) })
 							.setNegativeButton("Cancel",
-									object : DialogInterface.OnClickListener
-									{
-										override fun onClick(dialog: DialogInterface?, which: Int) = resumeEditing("")
-									})
+									{ dialog: DialogInterface?, which: Int ->  resumeEditing("") })
 							.create()
 							.show()
 				}
@@ -131,16 +102,16 @@ class SetPasswordActivity : Activity()
 	private fun commitAndFinish(password: String)
 	{
 		MainActivity.setPassword(this, password)
-		mSetPasswordStatusMessageView!!.text = ""
+		setPasswordStatusMessageLabel!!.text = ""
 		finish()
 
 	}
 
 	private fun resumeEditing(reason: String)
 	{
-		mSetPasswordStatusMessageView!!.text = reason
-		mPasswordView!!.requestFocus()
-		mSetPasswordStatusMessageView!!.visibility = if (true) View.VISIBLE else View.GONE
+		setPasswordStatusMessageLabel!!.text = reason
+		passwordEditBox!!.requestFocus()
+		setPasswordStatusMessageLabel!!.visibility = if (true) View.VISIBLE else View.GONE
 	}
 
 	/**

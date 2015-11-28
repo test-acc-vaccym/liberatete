@@ -49,6 +49,7 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.Toast
+import kotlinx.android.synthetic.activity_main.*;
 
 class MainActivity : Activity()
 {
@@ -79,21 +80,15 @@ class MainActivity : Activity()
 				.setMessage(
 						"DISCLAMER\nBy using this application you agree that you understand that main purpose of this application is to perform device factory reset, this would erase everything on your device!\nBeware of accidental triggering this funciton and make sure noone knows your password, so noone could remotely wipe your device. \nAuthor of this application takes no responsibility for accidental data loss.\nSoftware cames with NO WARRANTY.\nBefore using this application you must agree with this disclamer.")
 				.setCancelable(false)
-				.setPositiveButton("Agree", object : DialogInterface.OnClickListener
-				{
-					override fun onClick(dialog: DialogInterface?, which: Int)
-					{
-						setDisclamerAgreed(ctx)
-						displayingDisclamer = false
-					}
+				.setPositiveButton("Agree", {
+					dialog: DialogInterface?, which: Int ->
+					setDisclamerAgreed(ctx)
+					displayingDisclamer = false
 				})
-				.setNegativeButton("Disagree", object : DialogInterface.OnClickListener
-				{
-					override fun onClick(dialog: DialogInterface?, which: Int)
-					{
-						displayingDisclamer = false
-						activity.finish()
-					}
+				.setNegativeButton("Disagree", {
+					dialog: DialogInterface?, which: Int ->
+					displayingDisclamer = false
+					activity.finish()
 				})
 				.create()
 				.show()
@@ -118,65 +113,37 @@ class MainActivity : Activity()
 
 	private fun updateControls()
 	{
-
-		val isPassword = isPasswordConfigured
-		val isAdmin = isActiveAdmin
-
 		displayDisclamer(this)
 
-		val step1 = findViewById(R.id.buttonSetPassword) as Button
-		val step2 = findViewById(R.id.buttonEnableDeviceAdmin) as Button
-		val step3 = findViewById(R.id.buttonDisableLauncherIcon) as Button
+		val passwordConfigured = isPasswordConfigured;
 
-		if (isPassword)
-		{
-			step2.isEnabled = true
-			step1.setText(R.string.step1done)
-		}
-		else
-		{
-			step2.isEnabled = false
-			step1.setText(R.string.step1)
-		}
+		buttonEnableDeviceAdmin.isEnabled = passwordConfigured;
+		buttonSetPassword.setText(if (passwordConfigured) R.string.step1done else R.string.step1)
 
-		if (isAdmin)
-		{
-			step3.isEnabled = true
-			step2.setText(R.string.step2done)
-		}
-		else
-		{
-			step3.isEnabled = false
-			step2.setText(R.string.step2)
-		}
+		val adminActive = isActiveAdmin;
 
-		if (getLauncherDisabled(this))
-		{
-			step3.setText(R.string.step3done)
-		}
-		else
-		{
-			step3.setText(R.string.step3)
-		}
+		buttonDisableLauncherIcon.isEnabled = adminActive
+		buttonEnableDeviceAdmin.setText(if (adminActive) R.string.step2done else R.string.step2)
+
+		buttonDisableLauncherIcon.setText(if (getLauncherDisabled(this)) R.string.step3done else R.string.step3)
 	}
 
-	fun step1(v: View)
+	fun stepOneSetPassword(v: View)
 	{
 		val intent = Intent(this, SetPasswordActivity::class.java)
 		startActivity(intent)
 	}
 
-	fun step2(v: View)
+	fun steTwoEnableAdmin(v: View)
 	{
 		enableAdmin()
 	}
 
-	fun step3(v: View)
+	fun stepThreeDisableIcon(v: View)
 	{
 		// hide launcher icon
-		val p = packageManager
 
-		p.setComponentEnabledSetting(
+		packageManager.setComponentEnabledSetting(
 				componentName,
 				PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
 				PackageManager.DONT_KILL_APP)
@@ -220,58 +187,41 @@ class MainActivity : Activity()
 
 	companion object
 	{
-
 		val SHARED_PREF = "ru.qrck.liberate.te.inferis.PREF"
 		val PASSWORD_KEY = "pwd"
 		val LAUNCHER_DISABLED_KEY = "ldis"
 		val DISCLAMER_AGREED = "agreed_with_terms"
 
+		fun Context.setPrefs(fn: SharedPreferences.Editor.() -> Unit) : Unit
+		{
+			val prefs = this.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE)
+			val editor = prefs.edit()
+			editor.fn();
+			editor.commit()
+		}
+
+		fun <T> Context.getPrefs(fn: SharedPreferences.() -> T) : T
+		{
+			val prefs = this.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE)
+			return prefs.fn()
+		}
 
 		fun setDisclamerAgreed(ctx: Context)
-		{
-			val prefs = ctx.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE)
-			val editor = prefs.edit()
-			editor.putBoolean(DISCLAMER_AGREED, true)
-			editor.commit()
-		}
+			= ctx.setPrefs { putBoolean(DISCLAMER_AGREED, true) }
 
 		fun getIsDisclamerAgreed(ctx: Context): Boolean
-		{
-			val prefs = ctx.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE)
-			return prefs.getBoolean(DISCLAMER_AGREED, false)
-		}
-
+			= ctx.getPrefs { getBoolean(DISCLAMER_AGREED, false) }
 
 		fun setPassword(ctx: Context, strPassword: String)
-		{
-			val prefs = ctx.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE)
-			val editor = prefs.edit()
-			editor.putString(PASSWORD_KEY, strPassword)
-			editor.commit()
-		}
+			= ctx.setPrefs { putString(PASSWORD_KEY, strPassword) }
 
 		fun getPassword(ctx: Context): String
-		{
-			val prefs = ctx.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE)
-			return prefs.getString(PASSWORD_KEY, "")
-		}
+			= ctx.getPrefs { getString(PASSWORD_KEY, "") }
 
-		protected fun setLauncherDisabled(ctx: Context)
-		{
-			val prefs = ctx.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE)
-
-			val editor = prefs.edit()
-
-			editor.putBoolean(LAUNCHER_DISABLED_KEY, true)
-
-			editor.commit()
-		}
+		fun setLauncherDisabled(ctx: Context)
+			= ctx.setPrefs { putBoolean(LAUNCHER_DISABLED_KEY, true) }
 
 		fun getLauncherDisabled(ctx: Context): Boolean
-		{
-			val prefs = ctx.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE)
-
-			return prefs.getBoolean(LAUNCHER_DISABLED_KEY, false)
-		}
+			= ctx.getPrefs { getBoolean(LAUNCHER_DISABLED_KEY, false) }
 	}
 }
