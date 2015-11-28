@@ -74,14 +74,14 @@ class SetPasswordActivity : Activity()
 				if (password1.length < 7)
 				{
 					AlertDialog
-							.Builder(this)
-							.setMessage("Entered password is shorter than 7 symbols. Are you sure to use short password? Short password makes it easier to guess your password and wipe your device remotely.")
-							.setPositiveButton("Use short",
-									{ dialog: DialogInterface?, which: Int ->  commitAndFinish(password1) })
-							.setNegativeButton("Cancel",
-									{ dialog: DialogInterface?, which: Int ->  resumeEditing("") })
-							.create()
-							.show()
+						.Builder(this)
+						.setMessage("Entered password is shorter than 7 symbols. Are you sure to use short password? Short password makes it easier to guess your password and wipe your device remotely.")
+						.setPositiveButton("Use short",
+							{ dialog: DialogInterface?, which: Int ->  commitAndFinish(password1) })
+						.setNegativeButton("Cancel",
+							{ dialog: DialogInterface?, which: Int ->  resumeEditing("") })
+						.create()
+						.show()
 				}
 				else
 				{
