@@ -76,22 +76,22 @@ class MainActivity : Activity()
 
 		// Use the Builder class for convenient dialog construction
 		AlertDialog
-				.Builder(this)
-				.setMessage(
-						"DISCLAMER\nBy using this application you agree that you understand that main purpose of this application is to perform device factory reset, this would erase everything on your device!\nBeware of accidental triggering this funciton and make sure noone knows your password, so noone could remotely wipe your device. \nAuthor of this application takes no responsibility for accidental data loss.\nSoftware cames with NO WARRANTY.\nBefore using this application you must agree with this disclamer.")
-				.setCancelable(false)
-				.setPositiveButton("Agree", {
-					dialog: DialogInterface?, which: Int ->
-					setDisclamerAgreed(ctx)
-					displayingDisclamer = false
-				})
-				.setNegativeButton("Disagree", {
-					dialog: DialogInterface?, which: Int ->
-					displayingDisclamer = false
-					activity.finish()
-				})
-				.create()
-				.show()
+			.Builder(this)
+			.setMessage(
+				"DISCLAMER\nBy using this application you agree that you understand that main purpose of this application is to perform device factory reset, this would erase everything on your device!\nBeware of accidental triggering this funciton and make sure noone knows your password, so noone could remotely wipe your device. \nAuthor of this application takes no responsibility for accidental data loss.\nSoftware cames with NO WARRANTY.\nBefore using this application you must agree with this disclamer.")
+			.setCancelable(false)
+			.setPositiveButton("Agree", {
+				dialog: DialogInterface?, which: Int ->
+				setDisclamerAgreed(ctx)
+				displayingDisclamer = false
+			})
+			.setNegativeButton("Disagree", {
+				dialog: DialogInterface?, which: Int ->
+				displayingDisclamer = false
+				activity.finish()
+			})
+			.create()
+			.show()
 	}
 
 	override fun onCreate(savedInstanceState: Bundle?)
@@ -144,9 +144,9 @@ class MainActivity : Activity()
 		// hide launcher icon
 
 		packageManager.setComponentEnabledSetting(
-				componentName,
-				PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-				PackageManager.DONT_KILL_APP)
+			componentName,
+			PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+			PackageManager.DONT_KILL_APP)
 
 		setLauncherDisabled(this)
 
@@ -170,7 +170,7 @@ class MainActivity : Activity()
 		val intent = Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN)
 		intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, mDeviceAdmin)
 		intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION,
-				"Enable Liberate.Me as admin")
+			"Enable Liberate.Me as admin")
 
 		startActivityForResult(intent, 1)
 	}
@@ -192,7 +192,7 @@ class MainActivity : Activity()
 		val LAUNCHER_DISABLED_KEY = "ldis"
 		val DISCLAMER_AGREED = "agreed_with_terms"
 
-		fun Context.setPrefs(fn: SharedPreferences.Editor.() -> Unit) : Unit
+		fun Context.setPrefs(fn: SharedPreferences.Editor.() -> Unit): Unit
 		{
 			val prefs = this.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE)
 			val editor = prefs.edit()
@@ -200,7 +200,7 @@ class MainActivity : Activity()
 			editor.commit()
 		}
 
-		fun <T> Context.getPrefs(fn: SharedPreferences.() -> T) : T
+		fun <T> Context.getPrefs(fn: SharedPreferences.() -> T): T
 		{
 			val prefs = this.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE)
 			return prefs.fn()
