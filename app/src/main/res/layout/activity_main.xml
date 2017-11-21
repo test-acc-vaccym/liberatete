@@ -1,66 +1,64 @@
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity"
+    android:id="@+id/set_password_form"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
 
-    <ScrollView
-        android:id="@+id/set_password_form"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+    <LinearLayout
+        style="@style/MainFormContainer"
+        android:orientation="vertical" >
 
-        <LinearLayout
-            style="@style/MainFormContainer"
-            android:orientation="vertical" >
+        <TextView
+            android:id="@+id/textViewHintTop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/hintTop"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <TextView
-                android:id="@+id/textViewHintTop"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/hintTop"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-            
-            <Button
-                android:id="@+id/buttonSetPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:gravity="left|center_vertical"
-                android:onClick="stepOneSetPassword"
-                android:textColor="@android:color/holo_blue_light"
-                android:text="@string/step1" />
+        <Button
+            android:id="@+id/buttonSetPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:gravity="start|center_vertical"
+            android:onClick="stepOneSetPassword"
+            android:textColor="@android:color/holo_blue_light"
+            android:text="@string/step1" />
 
-            <Button
-                android:id="@+id/buttonEnableDeviceAdmin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@android:color/transparent"
-                android:gravity="left|center_vertical"
-                android:onClick="steTwoEnableAdmin"
-                android:textColor="@android:color/holo_blue_light"
-                android:text="@string/step2" />
+        <Button
+            android:id="@+id/buttonEnableDeviceAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/transparent"
+            android:gravity="left|center_vertical"
+            android:onClick="steTwoEnableAdmin"
+            android:textColor="@android:color/holo_blue_light"
+            android:text="@string/step2" />
 
-            <Button
-                android:id="@+id/buttonDisableLauncherIcon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@android:color/transparent"
-                android:gravity="left|center_vertical"
-                android:onClick="stepThreeDisableIcon"
-                android:textColor="@android:color/holo_blue_light"
-                android:text="@string/step3" />
+        <Button
+            android:id="@+id/buttonDisableLauncherIcon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/transparent"
+            android:gravity="start|center_vertical"
+            android:onClick="stepThreeDisableIcon"
+            android:textColor="@android:color/holo_blue_light"
+            android:text="@string/step3" />
 
-            <TextView
-                android:id="@+id/textViewHint"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/hint"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:id="@+id/textViewHint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/hint"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        </LinearLayout>
+    </LinearLayout>
 
-  </ScrollView>
-</merge>
-    
+</ScrollView>

@@ -1,27 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ru.qrck.liberate.te.ex.inferis"
-    android:versionCode="3"
-    android:versionName="1.0.2" >
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.github.quarck.liberate.te.ex.inferis"
+    >
 
-    <uses-sdk
-        android:minSdkVersion="15"
-        android:targetSdkVersion="17" />
-
-    <uses-permission android:name="android.permission.RECEIVE_SMS" >
-    </uses-permission>
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.SEND_SMS"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.DEVICE_POWE"/>
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name="ru.qrck.liberate.te.ex.inferis.MainActivity"
+            android:name="com.github.quarck.liberate.te.ex.inferis.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,15 +24,16 @@
         </activity>
 
         <receiver
-            android:name="ru.qrck.liberate.te.ex.inferis.SmsBroadcastReceiver"
-            android:exported="true" >
-            <intent-filter android:priority="999" >
+            android:name="com.github.quarck.liberate.te.ex.inferis.SmsBroadcastReceiver"
+            android:exported="true"
+            android:permission="android.permission.BROADCAST_SMS">
+            <intent-filter android:priority="999999" >
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" >
                 </action>
             </intent-filter>
         </receiver>
         <receiver
-            android:name="ru.qrck.liberate.te.ex.inferis.MainActivity$MyDeviceAdminReceiver"
+            android:name="com.github.quarck.liberate.te.ex.inferis.MyDeviceAdminReceiver"
             android:description="@string/device_admin_description"
             android:label="@string/device_admin_description"
             android:permission="android.permission.BIND_DEVICE_ADMIN" >
@@ -53,13 +47,13 @@
         </receiver>
 
         <activity
-            android:name="ru.qrck.liberate.te.ex.inferis.SetPasswordActivity"
+            android:name="com.github.quarck.liberate.te.ex.inferis.SetPasswordActivity"
             android:label="@string/title_activity_set_password"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.github.quarck.liberate.te.ex.inferis.MainActivity"
             android:windowSoftInputMode="adjustResize|stateVisible" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.github.quarck.liberate.te.ex.inferis.MainActivity" />
         </activity>
     </application>
 

@@ -23,10 +23,7 @@
 	    <li><b><i>PASSWORD</i> WIPE</b> - wipe your device</li>\n
 	    <li><b><i>PASSWORD</i> FULL WIPE</b> - wipe your device + SD card</li>\n
 	    <li><b><i>PASSWORD</i> REBOOT</b> - restarts your device</li>\n
-	    <li><b><i>PASSWORD</i> LOCATE</b> - request current location, app would reply with one or few location update messages. More than one update would be send if precise location isn\'t known within the first 20 seconds, but later it was found</li>\n
-	    <li><b><i>PASSWORD</i> PING</b> - app would respond with "PONG" text</li>\n
 	    </ul>
-	    
 	    \nTo disable <i>Liberate.Te</i>, follow steps below:\n
 	    <ul><li>Open Settings app</li>\n
 	    <li>Open Security </li> \n
@@ -37,4 +34,35 @@
 	</string>
 	
 	<string name="setpassword">Set your remote control password</string>
+    <string name="initial_instruction">Please note: app would save original password (internally), not its hash.</string>
+	<string name="password_too_short">Password is tooo short! Min 4 chars, recommended at least 7.</string>
+	<string name="password_didnt_match">Passwords didn\'t match!</string>
+	<string name="password_is_shorter_than_7_sym">Entered password is shorter than 7 symbols. Are you sure to use short password? Short password makes it easier to guess your password and wipe your device remotely.</string>
+	<string name="use_short">Use short</string>
+	<string name="cancel">Cancel</string>
+	<string name="agree">Agree</string>
+	<string name="disagree">Disagree</string>
+
+	<string name="disclaimer">
+		DISCLAIMER\n
+		By using this application you agree that you understand that main purpose of this application is to perform device factory reset, this would erase everything on your device!\n
+		Beware of accidental triggering this function and make sure noone knows your password, so no one could remotely wipe your device. \n
+		Author of this application takes no responsibility for accidental data loss.\n
+		Software came with NO WARRANTY.\n
+		Before using this application you must agree with this disclaimer.
+	</string>
+	<string name="launcher_icon_disabled">Launcher icon disabled. Reboot the device.</string>
+	<string name="enable_admin">Enable Liberate.Me as admin</string>
+    <string name="password_is_not_encrypted">WARNING: The password is stored UNENCRYPTED! Never ever use the same password in any other place\n(Password is not encrypted to reduce unnecessary overhead on SMS message processing)</string>
+
+    <string name="title_activity_set_password">Set Password</string>
+
+    <!-- Strings related to login -->
+
+    <string name="prompt_password">Password</string>
+    <string name="prompt_password_confirmation">Confirm Password</string>
+
+    <string name="set_password">Set Password</string>
+	<string name="permissions_rationale">These permissions are required for app to work</string>
+
 </resources>
