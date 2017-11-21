@@ -17,39 +17,49 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/hintTop"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            />
 
-        <Button
+        <TextView
             android:id="@+id/buttonSetPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:gravity="start|center_vertical"
+            android:gravity="center_vertical"
             android:onClick="stepOneSetPassword"
             android:textColor="@android:color/holo_blue_light"
-            android:text="@string/step1" />
+            android:text="@string/step1"
+            android:clickable="true"
+            android:focusable="true"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            />
 
-        <Button
+        <TextView
             android:id="@+id/buttonEnableDeviceAdmin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@android:color/transparent"
-            android:gravity="left|center_vertical"
-            android:onClick="steTwoEnableAdmin"
+            android:gravity="center_vertical"
+            android:onClick="stepTwoEnableAdmin"
             android:textColor="@android:color/holo_blue_light"
-            android:text="@string/step2" />
+            android:text="@string/step2"
+            android:clickable="true"
+            android:focusable="true"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            />
 
-        <Button
+        <TextView
             android:id="@+id/buttonDisableLauncherIcon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@android:color/transparent"
-            android:gravity="start|center_vertical"
+            android:gravity="center_vertical"
             android:onClick="stepThreeDisableIcon"
             android:textColor="@android:color/holo_blue_light"
-            android:text="@string/step3" />
+            android:text="@string/step3"
+            android:clickable="true"
+            android:focusable="true"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            />
 
         <TextView
             android:id="@+id/textViewHint"

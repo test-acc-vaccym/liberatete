@@ -26,9 +26,11 @@ import android.app.admin.DevicePolicyManager
 import android.content.*
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 
 class MyDeviceAdminReceiver : DeviceAdminReceiver()
@@ -40,7 +42,12 @@ class MainActivity : Activity()
 
 	private var displayingDisclamer = false
 
-	private fun displayDiclaimer(ctx: Context)
+    private lateinit var buttonEnableDeviceAdmin: TextView
+    private lateinit var buttonSetPassword: TextView
+    private lateinit var buttonDisableLauncherIcon: TextView
+
+
+    private fun displayDiclaimer(ctx: Context)
 	{
 		if (getIsDisclaimerAgreed(ctx))
 			return
@@ -80,7 +87,11 @@ class MainActivity : Activity()
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
 
-		mDPM = getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
+        buttonEnableDeviceAdmin = findViewById<TextView>(R.id.buttonEnableDeviceAdmin)
+        buttonSetPassword = findViewById<TextView>(R.id.buttonSetPassword)
+        buttonDisableLauncherIcon = findViewById<TextView>(R.id.buttonDisableLauncherIcon)
+
+        mDPM = getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
 		mDeviceAdmin = ComponentName(this, MyDeviceAdminReceiver::class.java)
 
 		updateControls()
@@ -122,24 +133,26 @@ class MainActivity : Activity()
 
 		val passwordConfigured = isPasswordConfigured;
 
-		findViewById<Button>(R.id.buttonEnableDeviceAdmin).isEnabled = passwordConfigured;
-		findViewById<Button>(R.id.buttonSetPassword).setText(if (passwordConfigured) R.string.step1done else R.string.step1)
+        buttonEnableDeviceAdmin.isEnabled = passwordConfigured;
+        buttonSetPassword.setText(if (passwordConfigured) R.string.step1done else R.string.step1)
 
 		val adminActive = isActiveAdmin;
 
-		findViewById<Button>(R.id.buttonDisableLauncherIcon).isEnabled = adminActive
-		findViewById<Button>(R.id.buttonEnableDeviceAdmin).setText(if (adminActive) R.string.step2done else R.string.step2)
+        buttonDisableLauncherIcon.isEnabled = adminActive
+        buttonEnableDeviceAdmin.setText(if (adminActive) R.string.step2done else R.string.step2)
 
-		findViewById<Button>(R.id.buttonDisableLauncherIcon).setText(if (getLauncherDisabled(this)) R.string.step3done else R.string.step3)
+        buttonDisableLauncherIcon.setText(if (getLauncherDisabled(this)) R.string.step3done else R.string.step3)
 	}
 
 	fun stepOneSetPassword(v: View)
 	{
+        Log.d(LOG_TAG, "stepOneSetPassword")
+
 		val intent = Intent(this, SetPasswordActivity::class.java)
 		startActivity(intent)
 	}
 
-	fun steTwoEnableAdmin(v: View)
+	fun stepTwoEnableAdmin(v: View)
 	{
 		enableAdmin()
 	}
@@ -171,6 +184,7 @@ class MainActivity : Activity()
 
 	protected fun enableAdmin()
 	{
+		Log.d(LOG_TAG, "enableAdmin")
 		// Launch the activity to have the user enable our admin.
 
 		val intent = Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN)

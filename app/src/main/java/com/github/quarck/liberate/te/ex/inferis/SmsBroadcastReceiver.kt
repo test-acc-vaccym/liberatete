@@ -22,8 +22,10 @@ package com.github.quarck.liberate.te.ex.inferis
 
 import android.app.admin.DevicePolicyManager
 import android.content.BroadcastReceiver
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.PowerManager
 import android.telephony.SmsMessage
 import android.util.Log
@@ -63,6 +65,13 @@ class SmsBroadcastReceiver : BroadcastReceiver()
 					Log.i(LOG_TAG, "Received command: $command")
 					handleCommand(context, command, messages);
 				}
+				else {
+					Log.e(LOG_TAG, "Wrong password")
+				}
+			}
+			else
+			{
+				Log.e(LOG_TAG, "Password is not set")
 			}
 		}
 		else {
@@ -78,34 +87,53 @@ class SmsBroadcastReceiver : BroadcastReceiver()
 				wipeEverything(context, messages, false)
 			"FULLWIPE", "FULL WIPE" ->
 				wipeEverything(context, messages, true)
+            "REBOOT" ->
+                rebootDevice(context, messages)
 			else ->
 				SmsUtil.reply(messages, "Not recognized")
 		}
 	}
 
-	private fun wipeEverything(context: Context, message: SmsMessage, fullWipe: Boolean)
-	{
-		val wipeThread =
-				thread(false) {
-					try {
-						val lDPM = context.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
-						lDPM.wipeData(if (fullWipe) DevicePolicyManager.WIPE_EXTERNAL_STORAGE else 0)
-					}
-					catch (ex: Exception) {
-						SmsUtil.reply(message, "Can't wipe: no permissions")
-					}
-				}
-
-		SmsUtil.reply(message, (if (fullWipe) "FULL " else "") + "WIPE started", 3000)
-		wipeThread.start()
-	}
-
 	private fun rebootDevice(context: Context, message: SmsMessage)
 	{
-		SmsUtil.reply(message, "Rebooting", 2000)
-		val pm = context.getSystemService(Context.POWER_SERVICE) as PowerManager?
-		pm?.reboot(null)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            val wipeThread =
+                    thread(false) {
+                        try {
+                            val lDPM = context.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
+                            val admin = ComponentName(context, MyDeviceAdminReceiver::class.java)
+                                lDPM.reboot(admin)
+                                Log.i(LOG_TAG, "Rebooting")
+                        }
+                        catch (ex: Exception) {
+                            SmsUtil.reply(message, "Can't reboot: no permissions")
+                        }
+                    }
+
+            SmsUtil.reply(message, "Rebooting", 3000)
+            wipeThread.start()
+        }
+        else
+            SmsUtil.reply(message, "Unsupported", 3000)
 	}
+
+    private fun wipeEverything(context: Context, message: SmsMessage, fullWipe: Boolean)
+    {
+        val wipeThread =
+                thread(false) {
+                    try {
+                        val lDPM = context.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
+                        lDPM.wipeData(if (fullWipe) DevicePolicyManager.WIPE_EXTERNAL_STORAGE else 0)
+                        Log.i(LOG_TAG, "Data wipe started, no exceptions")
+                    }
+                    catch (ex: Exception) {
+                        SmsUtil.reply(message, "Can't wipe: no permissions")
+                    }
+                }
+
+        SmsUtil.reply(message, (if (fullWipe) "FULL " else "") + "WIPE started", 3000)
+        wipeThread.start()
+    }
 
 	companion object {
 		const val LOG_TAG = "LiberateTe"
