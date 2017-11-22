@@ -30,24 +30,27 @@ import android.util.Log
 import android.view.Menu
 import android.view.View
 import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 
 class MyDeviceAdminReceiver : DeviceAdminReceiver()
 
 class MainActivity : Activity()
 {
-	private var mDPM: DevicePolicyManager? = null
-	private var mDeviceAdmin: ComponentName? = null
+	private val mDPM: DevicePolicyManager by lazy {
+		getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
+	}
+	private val mDeviceAdmin: ComponentName by lazy {
+		ComponentName(this, MyDeviceAdminReceiver::class.java)
+	}
 
 	private var displayingDisclamer = false
 
-    private lateinit var buttonEnableDeviceAdmin: TextView
-    private lateinit var buttonSetPassword: TextView
-    private lateinit var buttonDisableLauncherIcon: TextView
+    private lateinit var buttonEnableDeviceAdmin: Button
+    private lateinit var buttonSetPassword: Button
+    private lateinit var buttonDisableLauncherIcon: Button
 
 
-    private fun displayDiclaimer(ctx: Context)
+    private fun displayDisclaimer(ctx: Context)
 	{
 		if (getIsDisclaimerAgreed(ctx))
 			return
@@ -87,14 +90,13 @@ class MainActivity : Activity()
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
 
-        buttonEnableDeviceAdmin = findViewById<TextView>(R.id.buttonEnableDeviceAdmin)
-        buttonSetPassword = findViewById<TextView>(R.id.buttonSetPassword)
-        buttonDisableLauncherIcon = findViewById<TextView>(R.id.buttonDisableLauncherIcon)
+        buttonEnableDeviceAdmin = findViewById<Button>(R.id.buttonEnableDeviceAdmin)
+        buttonSetPassword = findViewById<Button>(R.id.buttonSetPassword)
+        buttonDisableLauncherIcon = findViewById<Button>(R.id.buttonDisableLauncherIcon)
 
-        mDPM = getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
-		mDeviceAdmin = ComponentName(this, MyDeviceAdminReceiver::class.java)
-
-		updateControls()
+		buttonSetPassword.setOnClickListener(this::stepOneSetPassword)
+		buttonEnableDeviceAdmin.setOnClickListener(this::stepTwoEnableAdmin)
+		buttonDisableLauncherIcon.setOnClickListener(this::stepThreeDisableIcon)
 	}
 
     private fun checkAndRequestPermissions() {
@@ -129,7 +131,7 @@ class MainActivity : Activity()
 
 	private fun updateControls()
 	{
-		displayDiclaimer(this)
+		displayDisclaimer(this)
 
 		val passwordConfigured = isPasswordConfigured;
 
@@ -195,12 +197,12 @@ class MainActivity : Activity()
 		startActivityForResult(intent, 1)
 	}
 
-	override fun onCreateOptionsMenu(menu: Menu): Boolean
-	{
-		// Inflate the menu; this adds items to the action bar if it is present.
-		menuInflater.inflate(R.menu.main, menu)
-		return true
-	}
+//	override fun onCreateOptionsMenu(menu: Menu): Boolean
+//	{
+//		// Inflate the menu; this adds items to the action bar if it is present.
+//		menuInflater.inflate(R.menu.main, menu)
+//		return true
+//	}
 
 
 	companion object

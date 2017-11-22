@@ -87,34 +87,9 @@ class SmsBroadcastReceiver : BroadcastReceiver()
 				wipeEverything(context, messages, false)
 			"FULLWIPE", "FULL WIPE" ->
 				wipeEverything(context, messages, true)
-            "REBOOT" ->
-                rebootDevice(context, messages)
 			else ->
 				SmsUtil.reply(messages, "Not recognized")
 		}
-	}
-
-	private fun rebootDevice(context: Context, message: SmsMessage)
-	{
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            val wipeThread =
-                    thread(false) {
-                        try {
-                            val lDPM = context.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
-                            val admin = ComponentName(context, MyDeviceAdminReceiver::class.java)
-                                lDPM.reboot(admin)
-                                Log.i(LOG_TAG, "Rebooting")
-                        }
-                        catch (ex: Exception) {
-                            SmsUtil.reply(message, "Can't reboot: no permissions")
-                        }
-                    }
-
-            SmsUtil.reply(message, "Rebooting", 3000)
-            wipeThread.start()
-        }
-        else
-            SmsUtil.reply(message, "Unsupported", 3000)
 	}
 
     private fun wipeEverything(context: Context, message: SmsMessage, fullWipe: Boolean)

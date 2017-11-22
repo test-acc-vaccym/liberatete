@@ -49,7 +49,7 @@ class SetPasswordActivity : Activity()
 		super.onCreate(savedInstanceState)
 
 		setContentView(R.layout.activity_set_password)
-		setupActionBar()
+//		setupActionBar()
 
 		setPasswordStatusMessageLabel = findViewById<TextView>(R.id.setPasswordStatusMessageLabel)
 		passwordEditBox = findViewById<EditText>(R.id.passwordEditBox)
@@ -114,30 +114,30 @@ class SetPasswordActivity : Activity()
 	/**
 	 * Set up the [android.app.ActionBar], if the API is available.
 	 */
-	private fun setupActionBar()
-	{
-		actionBar?.setDisplayHomeAsUpEnabled(true)
-	}
+//	private fun setupActionBar()
+//	{
+//		actionBar?.setDisplayHomeAsUpEnabled(true)
+//	}
 
-	override fun onOptionsItemSelected(item: MenuItem): Boolean
-	{
-		when (item.itemId)
-		{
-			android.R.id.home ->
-			{
-				finish()
-				return true
-			}
-		}
-		return super.onOptionsItemSelected(item)
-	}
-
-	override fun onCreateOptionsMenu(menu: Menu): Boolean
-	{
-		super.onCreateOptionsMenu(menu)
-		menuInflater.inflate(R.menu.set_password, menu)
-		return true
-	}
+//	override fun onOptionsItemSelected(item: MenuItem): Boolean
+//	{
+//		when (item.itemId)
+//		{
+//			android.R.id.home ->
+//			{
+//				finish()
+//				return true
+//			}
+//		}
+//		return super.onOptionsItemSelected(item)
+//	}
+//
+//	override fun onCreateOptionsMenu(menu: Menu): Boolean
+//	{
+//		super.onCreateOptionsMenu(menu)
+//		menuInflater.inflate(R.menu.set_password, menu)
+//		return true
+//	}
 
 	companion object {
 		const val LOG_TAG = "LiberateTe"

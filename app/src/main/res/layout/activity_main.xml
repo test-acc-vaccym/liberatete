@@ -1,14 +1,18 @@
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity"
-    android:id="@+id/set_password_form"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
 
     <LinearLayout
-        style="@style/MainFormContainer"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
         android:orientation="vertical" >
 
         <TextView
@@ -20,44 +24,35 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             />
 
-        <TextView
+        <Button
             android:id="@+id/buttonSetPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:onClick="stepOneSetPassword"
             android:textColor="@android:color/holo_blue_light"
             android:text="@string/step1"
-            android:clickable="true"
-            android:focusable="true"
             android:textAppearance="?android:attr/textAppearanceMedium"
             />
 
-        <TextView
+        <Button
             android:id="@+id/buttonEnableDeviceAdmin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="center_vertical"
-            android:onClick="stepTwoEnableAdmin"
             android:textColor="@android:color/holo_blue_light"
             android:text="@string/step2"
-            android:clickable="true"
-            android:focusable="true"
             android:textAppearance="?android:attr/textAppearanceMedium"
             />
 
-        <TextView
+        <Button
             android:id="@+id/buttonDisableLauncherIcon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="center_vertical"
-            android:onClick="stepThreeDisableIcon"
             android:textColor="@android:color/holo_blue_light"
             android:text="@string/step3"
-            android:clickable="true"
-            android:focusable="true"
             android:textAppearance="?android:attr/textAppearanceMedium"
             />
 
@@ -72,3 +67,4 @@
     </LinearLayout>
 
 </ScrollView>
+</LinearLayout>
