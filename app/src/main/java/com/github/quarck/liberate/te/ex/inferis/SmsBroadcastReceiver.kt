@@ -92,23 +92,23 @@ class SmsBroadcastReceiver : BroadcastReceiver()
 		}
 	}
 
-    private fun wipeEverything(context: Context, message: SmsMessage, fullWipe: Boolean)
-    {
-        val wipeThread =
-                thread(false) {
-                    try {
-                        val lDPM = context.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
-                        lDPM.wipeData(if (fullWipe) DevicePolicyManager.WIPE_EXTERNAL_STORAGE else 0)
-                        Log.i(LOG_TAG, "Data wipe started, no exceptions")
-                    }
-                    catch (ex: Exception) {
-                        SmsUtil.reply(message, "Can't wipe: no permissions")
-                    }
-                }
+	private fun wipeEverything(context: Context, message: SmsMessage, fullWipe: Boolean)
+	{
+		val wipeThread =
+				thread(false) {
+					try {
+						val lDPM = context.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
+						lDPM.wipeData(if (fullWipe) DevicePolicyManager.WIPE_EXTERNAL_STORAGE else 0)
+						Log.i(LOG_TAG, "Data wipe started, no exceptions")
+					}
+					catch (ex: Exception) {
+						SmsUtil.reply(message, "Can't wipe: no permissions")
+					}
+				}
 
-        SmsUtil.reply(message, (if (fullWipe) "FULL " else "") + "WIPE started", 3000)
-        wipeThread.start()
-    }
+		SmsUtil.reply(message, (if (fullWipe) "FULL " else "") + "WIPE started", 3000)
+		wipeThread.start()
+	}
 
 	companion object {
 		const val LOG_TAG = "LiberateTe"

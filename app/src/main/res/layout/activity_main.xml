@@ -24,7 +24,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             />
 
-        <Button
+        <TextView
             android:id="@+id/buttonSetPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,9 +32,11 @@
             android:textColor="@android:color/holo_blue_light"
             android:text="@string/step1"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:clickable="true"
+            android:focusable="true"
             />
 
-        <Button
+        <TextView
             android:id="@+id/buttonEnableDeviceAdmin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,9 +45,11 @@
             android:textColor="@android:color/holo_blue_light"
             android:text="@string/step2"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:clickable="true"
+            android:focusable="true"
             />
 
-        <Button
+        <TextView
             android:id="@+id/buttonDisableLauncherIcon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,6 +58,8 @@
             android:textColor="@android:color/holo_blue_light"
             android:text="@string/step3"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:clickable="true"
+            android:focusable="true"
             />
 
         <TextView

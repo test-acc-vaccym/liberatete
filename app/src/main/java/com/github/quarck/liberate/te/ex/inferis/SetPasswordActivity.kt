@@ -40,16 +40,11 @@ class SetPasswordActivity : Activity()
 	lateinit var passwordEditBox: EditText
 	lateinit var passwordConfirmationBox: EditText
 
-	/**
-	 * Keep track of the login task to ensure we can cancel it if requested.
-	 */
-
 	override fun onCreate(savedInstanceState: Bundle?)
 	{
 		super.onCreate(savedInstanceState)
 
 		setContentView(R.layout.activity_set_password)
-//		setupActionBar()
 
 		setPasswordStatusMessageLabel = findViewById<TextView>(R.id.setPasswordStatusMessageLabel)
 		passwordEditBox = findViewById<EditText>(R.id.passwordEditBox)
@@ -110,34 +105,6 @@ class SetPasswordActivity : Activity()
 		setPasswordStatusMessageLabel.visibility = View.VISIBLE
         passwordEditBox.requestFocus()
 	}
-
-	/**
-	 * Set up the [android.app.ActionBar], if the API is available.
-	 */
-//	private fun setupActionBar()
-//	{
-//		actionBar?.setDisplayHomeAsUpEnabled(true)
-//	}
-
-//	override fun onOptionsItemSelected(item: MenuItem): Boolean
-//	{
-//		when (item.itemId)
-//		{
-//			android.R.id.home ->
-//			{
-//				finish()
-//				return true
-//			}
-//		}
-//		return super.onOptionsItemSelected(item)
-//	}
-//
-//	override fun onCreateOptionsMenu(menu: Menu): Boolean
-//	{
-//		super.onCreateOptionsMenu(menu)
-//		menuInflater.inflate(R.menu.set_password, menu)
-//		return true
-//	}
 
 	companion object {
 		const val LOG_TAG = "LiberateTe"

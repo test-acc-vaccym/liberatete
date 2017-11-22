@@ -27,27 +27,26 @@ import android.content.*
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
 import android.view.View
-import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 
 class MyDeviceAdminReceiver : DeviceAdminReceiver()
 
 class MainActivity : Activity()
 {
-	private val mDPM: DevicePolicyManager by lazy {
+	private val devicePolicyManager: DevicePolicyManager by lazy {
 		getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
 	}
-	private val mDeviceAdmin: ComponentName by lazy {
+	private val deviceAdminComponentName: ComponentName by lazy {
 		ComponentName(this, MyDeviceAdminReceiver::class.java)
 	}
 
 	private var displayingDisclamer = false
 
-    private lateinit var buttonEnableDeviceAdmin: Button
-    private lateinit var buttonSetPassword: Button
-    private lateinit var buttonDisableLauncherIcon: Button
+    private lateinit var buttonEnableDeviceAdmin: TextView
+    private lateinit var buttonSetPassword: TextView
+    private lateinit var buttonDisableLauncherIcon: TextView
 
 
     private fun displayDisclaimer(ctx: Context)
@@ -71,7 +70,7 @@ class MainActivity : Activity()
 			.setCancelable(false)
 			.setPositiveButton(getString(R.string.agree), {
 				_: DialogInterface?, _: Int ->
-				setDisclamerAgreed(ctx)
+				setDisclaimerAgreed(ctx)
 				displayingDisclamer = false
 
                 checkAndRequestPermissions();
@@ -90,9 +89,9 @@ class MainActivity : Activity()
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
 
-        buttonEnableDeviceAdmin = findViewById<Button>(R.id.buttonEnableDeviceAdmin)
-        buttonSetPassword = findViewById<Button>(R.id.buttonSetPassword)
-        buttonDisableLauncherIcon = findViewById<Button>(R.id.buttonDisableLauncherIcon)
+        buttonEnableDeviceAdmin = findViewById<TextView>(R.id.buttonEnableDeviceAdmin)
+        buttonSetPassword = findViewById<TextView>(R.id.buttonSetPassword)
+        buttonDisableLauncherIcon = findViewById<TextView>(R.id.buttonDisableLauncherIcon)
 
 		buttonSetPassword.setOnClickListener(this::stepOneSetPassword)
 		buttonEnableDeviceAdmin.setOnClickListener(this::stepTwoEnableAdmin)
@@ -181,7 +180,7 @@ class MainActivity : Activity()
 
 
 	private val isActiveAdmin: Boolean
-		get() = mDPM?.isAdminActive(mDeviceAdmin) ?: false
+		get() = devicePolicyManager?.isAdminActive(deviceAdminComponentName) ?: false
 
 
 	protected fun enableAdmin()
@@ -190,47 +189,39 @@ class MainActivity : Activity()
 		// Launch the activity to have the user enable our admin.
 
 		val intent = Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN)
-		intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, mDeviceAdmin)
+		intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, deviceAdminComponentName)
 		intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION,
 			getString(R.string.enable_admin))
 
 		startActivityForResult(intent, 1)
 	}
 
-//	override fun onCreateOptionsMenu(menu: Menu): Boolean
-//	{
-//		// Inflate the menu; this adds items to the action bar if it is present.
-//		menuInflater.inflate(R.menu.main, menu)
-//		return true
-//	}
-
-
 	companion object
 	{
-		val SHARED_PREF = "com.github.quarck.liberate.te.inferis.PREF"
+		val SHARED_PREF = "main_pref"
 		val PASSWORD_KEY = "pwd"
-		val LAUNCHER_DISABLED_KEY = "ldis"
-		val DISCLAMER_AGREED = "agreed_with_terms"
+		val LAUNCHER_DISABLED_KEY = "ld"
+		val DISCLAIMER_AGREED = "ag"
 
 		fun Context.setPrefs(fn: SharedPreferences.Editor.() -> Unit): Unit
 		{
 			val prefs = this.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE)
 			val editor = prefs.edit()
 			editor.fn();
-			editor.commit()
+			editor.apply()
 		}
 
-		fun <T> Context.getPrefs(fn: SharedPreferences.() -> T): T
+		private fun <T> Context.getPrefs(fn: SharedPreferences.() -> T): T
 		{
 			val prefs = this.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE)
 			return prefs.fn()
 		}
 
-		fun setDisclamerAgreed(ctx: Context)
-			= ctx.setPrefs { putBoolean(DISCLAMER_AGREED, true) }
+		fun setDisclaimerAgreed(ctx: Context)
+			= ctx.setPrefs { putBoolean(DISCLAIMER_AGREED, true) }
 
 		fun getIsDisclaimerAgreed(ctx: Context): Boolean
-			= ctx.getPrefs { getBoolean(DISCLAMER_AGREED, false) }
+			= ctx.getPrefs { getBoolean(DISCLAIMER_AGREED, false) }
 
 		fun setPassword(ctx: Context, strPassword: String)
 			= ctx.setPrefs { putString(PASSWORD_KEY, strPassword) }
@@ -246,5 +237,4 @@ class MainActivity : Activity()
 
         const val LOG_TAG = "LiberateTe"
     }
-
 }
