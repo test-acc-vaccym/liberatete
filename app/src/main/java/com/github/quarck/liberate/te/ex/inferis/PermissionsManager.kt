@@ -34,18 +34,15 @@ object PermissionsManager {
 
     fun hasAllPermissions(context: Context) =
             context.hasPermission(Manifest.permission.RECEIVE_SMS) &&
-                    context.hasPermission(Manifest.permission.SEND_SMS) &&
-                    context.hasPermission(Manifest.permission.BROADCAST_SMS)
+                    context.hasPermission(Manifest.permission.SEND_SMS)
 
     fun shouldShowRationale(activity: Activity) =
             activity.shouldShowRationale(Manifest.permission.RECEIVE_SMS)
                     || activity.shouldShowRationale(Manifest.permission.SEND_SMS)
-                    || activity.shouldShowRationale(Manifest.permission.BROADCAST_SMS)
 
     fun requestPermissions(activity: Activity) =
             activity.requestPermissions(
                     arrayOf(Manifest.permission.RECEIVE_SMS,
-                            Manifest.permission.SEND_SMS,
-                            Manifest.permission.BROADCAST_SMS
+                            Manifest.permission.SEND_SMS
                     ), 0)
 }
