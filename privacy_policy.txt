@@ -1,0 +1,5 @@
+Liberate.Te is not collecting any personal information. 
+
+Liberate.Te is not sending any information to the internet.
+
+The only piece of infromation stored is a password defined by user at the initial configuration stage. It is stored locally.  
