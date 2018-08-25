@@ -42,7 +42,17 @@
 	<string name="agree">Agree</string>
 	<string name="disagree">Disagree</string>
 
-	<string name="disclaimer">DISCLAIMER\nBy using this application you agree that you understand that main purpose of this application is to perform device factory reset, this would erase everything on your device!\nBeware of accidental triggering this function and make sure no one knows your password, so no one could remotely wipe your device.\nAuthor of this application takes no responsibility for accidental data loss.\nSoftware came with NO WARRANTY.\nBefore using this application you must agree with this disclaimer.</string>
+	<string name="disclaimer">DISCLAIMER\nBy using this application you agree that you understand that main purpose of this application
+		is to perform device factory reset, this would erase everything on your device!\n
+		Beware of accidental triggering this function and make sure no one knows your password,
+		so no one could remotely wipe your device.\n
+		Author of this application takes no responsibility for accidental data loss.\n
+		Software came with NO WARRANTY.\n
+		Before using this application you must agree with this disclaimer.
+	</string>
+
+	<string name="disclosure">BIND_DEVICE_ADMIN permission use\n\nIn order to function correctly this app requires access to device admin privileges (BIND_DEVICE_ADMIN)\n\nApp needs access to the following security policies of the device admin:\n\n* wipe-data - this is required to be able to perform device factory reset when requested by the user. \n\nOn the next screen you\'d be prompted to grant device admin privileges to this app.
+	</string>
 
 	<string name="launcher_icon_disabled">Launcher icon disabled. Reboot the device.</string>
 	<string name="enable_admin">Enable Liberate.Me as admin</string>

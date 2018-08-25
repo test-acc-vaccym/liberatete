@@ -49,6 +49,28 @@ class MainActivity : Activity()
     private lateinit var buttonDisableLauncherIcon: TextView
 
 
+	private fun disclosure(ctx: Context) {
+		AlertDialog
+				.Builder(this)
+				.setMessage(getString(R.string.disclosure))
+				.setCancelable(false)
+				.setPositiveButton(getString(R.string.agree), {
+					_: DialogInterface?, _: Int ->
+
+					if (getIsDisclaimerAgreed(this))
+						checkAndRequestPermissions();
+
+				})
+				.setNegativeButton(getString(R.string.disagree), {
+					_: DialogInterface?, _: Int ->
+					displayingDisclamer = false
+					this@MainActivity.finish()
+				})
+				.create()
+				.show()
+
+	}
+
     private fun displayDisclaimer(ctx: Context)
 	{
 		if (getIsDisclaimerAgreed(ctx))
@@ -124,8 +146,7 @@ class MainActivity : Activity()
 		super.onResume()
 		updateControls()
 
-        if (getIsDisclaimerAgreed(this))
-            checkAndRequestPermissions();
+        disclosure(this);
 	}
 
 	private fun updateControls()
